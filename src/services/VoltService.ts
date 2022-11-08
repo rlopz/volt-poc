@@ -18,6 +18,8 @@ export type OrderData = {
   },
 }
 
+const BASE_URL = 'http://localhost:3000';
+
 export const connect = async ({
   clientId,
   clientSecret,
@@ -26,7 +28,7 @@ export const connect = async ({
 }: ConnectData) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/auth/connect',
+      `${BASE_URL}/auth/connect`,
       {
         clientId,
         clientSecret,
@@ -39,11 +41,11 @@ export const connect = async ({
     console.log(JSON.stringify(response.data, null, 4));
 
     return response.data;
-  } catch (error) {
+  } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.log('error message: ', error.message);
+      console.log('error message: ', error?.message);
 
-      return error.message;
+      return error?.message;
     } else {
       console.log('unexpected error: ', error);
       return 'An unexpected error occurred';
@@ -60,7 +62,7 @@ export const purchase = async ({
 }: OrderData) => {
   try {
     const response = await axios.post(
-      'http://localhost:3000/checkout/pay',
+      `${BASE_URL}/checkout/pay`,
       {
         currencyCode,
         amount,
@@ -73,11 +75,11 @@ export const purchase = async ({
     console.log(JSON.stringify(response.data, null, 4));
 
     return response.data;
-  } catch (error) {
+  } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.log('error message: ', error.message);
+      console.log('error message: ', error?.message);
 
-      return error.message;
+      return error?.message;
     } else {
       console.log('unexpected error: ', error);
       return 'An unexpected error occurred';

@@ -8,7 +8,7 @@ interface IConnectPage {}
 
 const ConnectPage: React.FC<IConnectPage> = () => {
     const [connected, setConnected] = useState<boolean>(false)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { register, handleSubmit } = useForm<ConnectData>();
 
     const onSubmit: (data: ConnectData) => void = async (data) => {
